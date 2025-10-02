@@ -1,6 +1,7 @@
 package ar.edu.unlpam.ing.ProyectoAyDSII.services;
 
 import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ar.edu.unlpam.ing.ProyectoAyDSII.interfaces.SolicitudRecoleccionDAO;
@@ -15,7 +16,13 @@ public class SolicitudRecoleccionService {
   }
 
   public ResponseEntity<SolicitudRecoleccion> crear(SolicitudRecoleccion solicitud) {
-    return solicitudDAO.guardar(solicitud);
+    ResponseEntity<SolicitudRecoleccion> solicitudResponse = solicitudDAO.guardar(solicitud);
+
+    if (solicitudResponse.getStatusCode() != HttpStatus.OK) {
+      return ResponseEntity.internalServerError().body(null);
+    }
+
+    return solicitudResponse;
   }
 
   // SOLO PARA PROBAR

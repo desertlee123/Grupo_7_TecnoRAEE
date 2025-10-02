@@ -29,13 +29,5 @@ public class DetalleSolicitudSql2o implements DetalleSolicitudDAO {
       e.printStackTrace();
       return ResponseEntity.internalServerError().body(null);
     }
-
   }
-
-  /*
-   * @Override
-   * public List<DetalleSolicitud> obtenerPorSolicitud(String codigoValidacion) {
-   * String sql = "SELECT * FROM detalle_solicitud WHERE "
-   * }
-   */
 }

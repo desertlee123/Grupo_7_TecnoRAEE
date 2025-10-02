@@ -2,13 +2,11 @@ package ar.edu.unlpam.ing.ProyectoAyDSII.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
 public class SolicitudRecoleccion {
-  @JsonIgnore
-  private Long idSolicitud; // solo se usa en DAO
+  private Long idSolicitud;
   private LocalDateTime fechaCreacion;
   private String direccion;
   private LocalDateTime fechaRecoleccion;
