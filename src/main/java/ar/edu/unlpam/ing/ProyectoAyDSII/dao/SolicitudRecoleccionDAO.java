@@ -1,4 +1,4 @@
-package ar.edu.unlpam.ing.ProyectoAyDSII.interfaces;
+package ar.edu.unlpam.ing.ProyectoAyDSII.dao;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ar.edu.unlpam.ing.ProyectoAyDSII.dao.SolicitudRecoleccionDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.enums.EstadoSolicitud;
-import ar.edu.unlpam.ing.ProyectoAyDSII.interfaces.SolicitudRecoleccionDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.models.SolicitudRecoleccion;
 
 @Service

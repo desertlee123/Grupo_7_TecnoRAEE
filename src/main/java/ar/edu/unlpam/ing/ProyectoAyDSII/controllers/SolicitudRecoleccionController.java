@@ -13,7 +13,7 @@ import ar.edu.unlpam.ing.ProyectoAyDSII.services.SolicitudRecoleccionService;
 public class SolicitudRecoleccionController {
   private final SolicitudRecoleccionService service;
 
-  public SolicitudRecoleccionController(SolicitudRecoleccionService service) { narnia clear no es que el texto aparesca de forma fluida sino que es el curson quien se desplaza de esta forma tan interesante clear an minimalims clear architecture clear narno a
+  public SolicitudRecoleccionController(SolicitudRecoleccionService service) {
     this.service = service;
   }
 
@@ -27,4 +27,4 @@ public class SolicitudRecoleccionController {
   public List<SolicitudRecoleccion> obtenerTodas() {
     return service.obtenerTodas();
   }
-} 
+}

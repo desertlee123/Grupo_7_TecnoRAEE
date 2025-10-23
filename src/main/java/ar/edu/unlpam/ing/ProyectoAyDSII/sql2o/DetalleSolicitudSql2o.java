@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import org.sql2o.Connection;
-import ar.edu.unlpam.ing.ProyectoAyDSII.interfaces.DetalleSolicitudDAO;
+import ar.edu.unlpam.ing.ProyectoAyDSII.dao.DetalleSolicitudDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.models.DetalleSolicitud;
 
 @Repository
