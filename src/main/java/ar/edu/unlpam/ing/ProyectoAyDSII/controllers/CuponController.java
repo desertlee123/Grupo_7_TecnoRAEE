@@ -26,26 +26,20 @@ public class CuponController {
 
     @GetMapping("cupones/obtenerPorIdUsuario")
     public ResponseEntity<List<Cupon>> obtenerPorIdUsuario(@RequestParam Long id) {
-        ResponseEntity<List<Cupon>> response = service.obtenerPorIdUsuario(id);
-
-        registraLog.debug(
-            "{} cupones obtenidos para el usuario con id {} ",
-            (response.getStatusCode() == HttpStatus.OK)? response.getBody().size(): "no hubo",
-            id
-        );
-
-        int size = response.getBody().size();
-        
+        ResponseEntity<List<Cupon>> response = service.obtenerPorIdUsuario(id); 
 
         if (response.getStatusCode() == HttpStatus.OK){
             registraLog.debug(
                 "{} cupones obtenidos para el usuario con id {} ",
-                size,
+                response.getBody().size(),
                 id
             );
+
             registraLog.info("Cupones obtenidos con exito para el usuario con id {}", id);
         } else if (response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR){
             registraLog.info("Cupones no obtenidos por fallas en el servidor para el usuario con id {}", id);
+        } else if (response.getStatusCode() == HttpStatus.NOT_FOUND){
+            registraLog.info("No se encontraron cupones para el usuario con id {}", id);
         }
 
         return response;
