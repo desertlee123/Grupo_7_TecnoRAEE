@@ -49,6 +49,8 @@ public class CuponController {
             registraLog.info("Cupones obtenidos con exito para el usuario con id {}", id);
         } else if (response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
             registraLog.info("Cupones no obtenidos por fallas en el servidor para el usuario con id {}", id);
+        } else if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
+            registraLog.info("No se encontraron cupones para el usuario con id {}", id);
         }
 
         return response;
