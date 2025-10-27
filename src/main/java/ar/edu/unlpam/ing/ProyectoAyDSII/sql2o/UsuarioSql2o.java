@@ -21,32 +21,48 @@ public class UsuarioSql2o implements UsuarioDAO {
   public List<Usuario> obtenerParticulares(
       Long idTienda,
       int minSolicitudes,
-      int limit,
-      boolean skipCiudadFilter) {
+      int limit
+      /*boolean skipCiudadFilter*/) {
+
+    // String sql = "SELECT u.id_usuario AS idUsuario, u.nombre, u.apellido,
+    // u.direccion, u.id_tipo AS idTipo " +
+    // "FROM usuarios u " +
+    // "LEFT JOIN (SELECT id_usuario, COUNT(*) AS cnt FROM solicitudes_recoleccion
+    // GROUP BY id_usuario) s ON s.id_usuario = u.id_usuario "
+    // +
+    // "WHERE u.id_tipo = :idTipoParticular " +
+    // " AND s.cnt >= :minSolicitudes " +
+    // (skipCiudadFilter ? ""
+    // : " AND (u.direccion LIKE CONCAT('%', (SELECT SUBSTRING_INDEX(direccion,'
+    // ',1) FROM usuarios WHERE id_usuario = :idTienda), '%')) ")
+    // +
+    // "LIMIT :limit";
 
     String sql = "SELECT u.id_usuario AS idUsuario, u.nombre, u.apellido, u.direccion, u.id_tipo AS idTipo " +
         "FROM usuarios u " +
-        "LEFT JOIN (SELECT id_usuario, COUNT(*) AS cnt FROM solicitudes_recoleccion GROUP BY id_usuario) s ON s.id_usuario = u.id_usuario "
-        +
+        "INNER JOIN solicitudes_recoleccion sr ON u.id_usuario = sr.id_usuario " +
         "WHERE u.id_tipo = :idTipoParticular " +
-        "  AND s.cnt >= :minSolicitudes " +
-        (skipCiudadFilter ? ""
-            : "  AND (u.direccion LIKE CONCAT('%', (SELECT SUBSTRING_INDEX(direccion,' ',1) FROM usuarios WHERE id_usuario = :idTienda), '%')) ")
-        +
+        "GROUP BY u.id_usuario " +
+        "HAVING COUNT(sr.id_solicitud) >= :minSolicitudes " +
         "LIMIT :limit";
 
     try (Connection con = sql2o.open()) {
-      Query query = con.createQuery(sql)
-          .addParameter("idTipoParticular", ID_TIPO_PARTICULAR)
-          .addParameter("minSolicitudes", minSolicitudes)
-          .addParameter("limit", limit);
+      // Query query = con.createQuery(sql)
+      // .addParameter("idTipoParticular", ID_TIPO_PARTICULAR)
+      // .addParameter("minSolicitudes", minSolicitudes)
+      // .addParameter("limit", limit);
 
       // solo agregar idTienda si se usa en el SQL
-      if (!skipCiudadFilter) {
-        query.addParameter("idTienda", idTienda);
-      }
+      // if (!skipCiudadFilter) {
+      // query.addParameter("idTienda", idTienda);
+      // }
 
-      return query.executeAndFetch(Usuario.class);
+      // return query.executeAndFetch(Usuario.class);
+      return con.createQuery(sql)
+          .addParameter("idTipoParticular", ID_TIPO_PARTICULAR)
+          .addParameter("minSolicitudes", minSolicitudes)
+          .addParameter("limit", limit)
+          .executeAndFetch(Usuario.class);
     }
   }
 }
