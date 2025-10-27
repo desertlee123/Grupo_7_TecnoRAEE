@@ -7,6 +7,6 @@ public interface UsuarioDAO {
   public List<Usuario> obtenerParticulares(
       Long idTienda,
       int minSolicitudes,
-      int limit,
-      boolean skipCiudadFilter);
+      int limit
+      /*boolean skipCiudadFilter*/);
 }

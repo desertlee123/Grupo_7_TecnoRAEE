@@ -2,6 +2,7 @@ package ar.edu.unlpam.ing.ProyectoAyDSII.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 import ar.edu.unlpam.ing.ProyectoAyDSII.models.Cupon;
+import ar.edu.unlpam.ing.ProyectoAyDSII.models.CuponResponse;
 import ar.edu.unlpam.ing.ProyectoAyDSII.services.CuponService;
 import java.util.HashMap;
 import java.util.List;
@@ -29,22 +30,24 @@ public class CuponController {
         ResponseEntity<List<Cupon>> response = service.obtenerPorIdUsuario(id);
 
         registraLog.debug(
-            "{} cupones obtenidos para el usuario con id {} ",
-            (response.getStatusCode() == HttpStatus.OK)? response.getBody().size(): "no hubo",
-            id
-        );
-
-        int size = response.getBody().size();
-        
-
-        if (response.getStatusCode() == HttpStatus.OK){
-            registraLog.debug(
                 "{} cupones obtenidos para el usuario con id {} ",
-                size,
-                id
-            );
+                (response.getStatusCode() == HttpStatus.OK) ? response.getBody().size() : "no hubo",
+                id);
+
+        int size;
+        if (response.getBody() == null) {
+            size = -1;
+        } else {
+            size = response.getBody().size();
+        }
+
+        if (response.getStatusCode() == HttpStatus.OK) {
+            registraLog.debug(
+                    "{} cupones obtenidos para el usuario con id {} ",
+                    size,
+                    id);
             registraLog.info("Cupones obtenidos con exito para el usuario con id {}", id);
-        } else if (response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR){
+        } else if (response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
             registraLog.info("Cupones no obtenidos por fallas en el servidor para el usuario con id {}", id);
         }
 
@@ -52,16 +55,14 @@ public class CuponController {
     }
 
     @PostMapping("cupones/registrarCupon")
-    public ResponseEntity<HashMap<String, Object>> registrarCupon(@RequestBody Cupon datos) {
-        
-        ResponseEntity<HashMap<String, Object>> response = service.registrarCupon(datos);
+    public ResponseEntity<CuponResponse> registrarCupon(@RequestBody Cupon datos) {
+        ResponseEntity<CuponResponse> response = service.registrarCupon(datos);
 
-        if (response.getStatusCode() == HttpStatus.OK){
-            registraLog.info("Cupone registrado exitosamente con id {}", response.getBody().get("idCupon"));
-
-            registraLog.debug("Cupon enlasado a usuarios {}", response.getBody().get("usuariosDestinatarios"));
-        } else if (response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR){
-            registraLog.info("Falla al registrar el cupon");
+        if (response.getStatusCode() == HttpStatus.OK) {
+            registraLog.info("Cupón registrado exitosamente con id {}", response.getBody().idCupon());
+            registraLog.debug("Cupon enlazado a usuarios {}", response.getBody().usuariosDestinatarios());
+        } else if (response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
+            registraLog.info("Falla al registrar el cupón");
         }
 
         return response;
