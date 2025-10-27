@@ -52,6 +52,11 @@ public class CuponSql2o implements CuponDAO {
   public ResponseEntity<Cupon> guardar(Cupon cupon) {
     String sql = "INSERT INTO cupones (titulo, descripcion, codigo, fechaInicio, fechaExpiracion, condiciones, webPage, usos, idTienda) VALUES (:titulo, :descripcion, :codigo, :fechaInicio, :fechaExpiracion, :condiciones, :webPage, :usos, :idTienda)";
 
+    // se verifica que los campos obligatorios no sean nulos
+    if (cupon.getTitulo() == null || cupon.getCodigo() == null || cupon.getFechaInicio() == null || cupon.getFechaExpiracion() == null || cupon.getIdTienda() == null) {
+      return ResponseEntity.badRequest().body(null);
+    }
+
     try (Connection con = sql2o.open()) {
       BigInteger key = (BigInteger) con.createQuery(sql, true)
           .bind(cupon)
