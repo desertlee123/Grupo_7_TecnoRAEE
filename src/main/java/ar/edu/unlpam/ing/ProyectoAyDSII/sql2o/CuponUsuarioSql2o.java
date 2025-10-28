@@ -17,7 +17,7 @@ public class CuponUsuarioSql2o implements CuponUsuarioDAO {
 
   @Override
   public ResponseEntity<CuponUsuario> guardar(CuponUsuario cuponUsuario) {
-    String sql = "INSERT INTO cupones_usuarios (idCupon, idUsuario) VALUES (:idCupon, :idUsuario)";
+    String sql = QueryBuilder.generateQueryInsert(cuponUsuario, this.getTableName());
 
     try (Connection con = sql2o.beginTransaction()) {
       con.createQuery(sql)
@@ -30,5 +30,9 @@ public class CuponUsuarioSql2o implements CuponUsuarioDAO {
       e.printStackTrace();
       return ResponseEntity.internalServerError().body(null);
     }
+  }
+
+  private String getTableName() {
+    return "cupones_usuarios";
   }
 }

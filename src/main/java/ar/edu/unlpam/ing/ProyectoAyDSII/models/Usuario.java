@@ -9,4 +9,5 @@ public class Usuario {
   private String apellido;
   private String direccion;
   private Long idTipo;
+  private String localidad;
 }

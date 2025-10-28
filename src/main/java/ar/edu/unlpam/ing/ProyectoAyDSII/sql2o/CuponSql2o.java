@@ -1,5 +1,6 @@
 package ar.edu.unlpam.ing.ProyectoAyDSII.sql2o;
 
+import java.lang.reflect.Field;
 import java.math.BigInteger;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -50,12 +51,14 @@ public class CuponSql2o implements CuponDAO {
 
   @Override
   public ResponseEntity<Cupon> guardar(Cupon cupon) {
-    String sql = "INSERT INTO cupones (titulo, descripcion, codigo, fechaInicio, fechaExpiracion, condiciones, webPage, usos, idTienda) VALUES (:titulo, :descripcion, :codigo, :fechaInicio, :fechaExpiracion, :condiciones, :webPage, :usos, :idTienda)";
-
     // se verifica que los campos obligatorios no sean nulos
-    if (cupon.getTitulo() == null || cupon.getCodigo() == null || cupon.getFechaInicio() == null || cupon.getFechaExpiracion() == null || cupon.getIdTienda() == null) {
+    if (cupon.getTitulo() == null || cupon.getCodigo() == null || cupon.getFechaInicio() == null
+        || cupon.getFechaExpiracion() == null || cupon.getIdTienda() == null) {
       return ResponseEntity.badRequest().body(null);
     }
+
+    // Vamos a hacer reflexión señores :)
+    String sql = QueryBuilder.generateQueryInsert(cupon, getTableName());
 
     try (Connection con = sql2o.open()) {
       BigInteger key = (BigInteger) con.createQuery(sql, true)
@@ -71,5 +74,9 @@ public class CuponSql2o implements CuponDAO {
       e.printStackTrace();
       return ResponseEntity.internalServerError().body(null);
     }
+  }
+
+  private String getTableName() {
+    return "cupones";
   }
 }

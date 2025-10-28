@@ -8,6 +8,6 @@ import org.sql2o.Sql2o;
 public class Sql2oConfig {
   @Bean
   public Sql2o sql2o() {
-    return new Sql2o("jdbc:mysql://localhost:3306/tecno_raee", "root", "");
+    return new Sql2o("jdbc:mysql://localhost:3307/tecno_raee", "root", "");
   }
 }

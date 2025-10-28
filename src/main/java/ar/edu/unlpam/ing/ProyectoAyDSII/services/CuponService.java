@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ar.edu.unlpam.ing.ProyectoAyDSII.dao.CuponDAO;
+import ar.edu.unlpam.ing.ProyectoAyDSII.dao.CuponDAOProxy;
 import ar.edu.unlpam.ing.ProyectoAyDSII.dao.CuponUsuarioDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.dao.UsuarioDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.models.Cupon;
@@ -16,21 +16,21 @@ import ar.edu.unlpam.ing.ProyectoAyDSII.models.Usuario;
 
 @Service
 public class CuponService {
-    private final CuponDAO cuponDAO;
-    private final UsuarioDAO usuarioDAO;
+    private final CuponDAOProxy cuponDAOProxy;
     private final CuponUsuarioDAO cuponUsuarioDAO;
+    private final UsuarioDAO usuarioDAO;
 
     public CuponService(
-            CuponDAO cuponDAO,
-            UsuarioDAO usuarioDAO,
-            CuponUsuarioDAO cuponUsuarioDAO) {
-        this.cuponDAO = cuponDAO;
-        this.usuarioDAO = usuarioDAO;
+            CuponDAOProxy cuponDAOProxy,
+            CuponUsuarioDAO cuponUsuarioDAO,
+            UsuarioDAO usuarioDAO) {
+        this.cuponDAOProxy = cuponDAOProxy;
         this.cuponUsuarioDAO = cuponUsuarioDAO;
+        this.usuarioDAO = usuarioDAO;
     }
 
-    public ResponseEntity<List<Cupon>> obtenerPorIdUsuario(Long id) {
-        return cuponDAO.obtenerPorIdUsuario(id);
+    public ResponseEntity<List<Cupon>> obtenerPorIdUsuario(Long id, List<Long> idCuponesExistentes) {
+        return cuponDAOProxy.obtenerPorIdUsuarioLazy(id, idCuponesExistentes);
     }
 
     public ResponseEntity<CuponResponse> registrarCupon(Cupon cupon) {
@@ -38,7 +38,7 @@ public class CuponService {
         List<Long> destinatarios = calcularUsuariosDestinatarios(cupon);
 
         // 2) persistir cupón -> obtener id
-        ResponseEntity<Cupon> cuponGuardadoResponse = cuponDAO.guardar(cupon);
+        ResponseEntity<Cupon> cuponGuardadoResponse = cuponDAOProxy.guardar(cupon);
 
         if (cuponGuardadoResponse.getStatusCode() != HttpStatus.OK) {
             return ResponseEntity.internalServerError().build();
@@ -54,37 +54,18 @@ public class CuponService {
             }
         }
 
-        // 4) construir respuesta JSON final manualmente
-        // HashMap<String, Object> response = new HashMap<>();
-        // response.put("idCupon", cuponGuardado.getIdCupon());
-        // response.put("titulo", cuponGuardado.getTitulo());
-        // response.put("descripcion", cuponGuardado.getDescripcion());
-        // response.put("codigo", cuponGuardado.getCodigo());
-        // response.put("fechaInicio", cuponGuardado.getFechaInicio());
-        // response.put("fechaExpiracion", cuponGuardado.getFechaExpiracion());
-        // response.put("condiciones", cuponGuardado.getCondiciones());
-        // response.put("webPage", cuponGuardado.getWebPage());
-        // response.put("usos", cuponGuardado.getUsos());
-        // response.put("idTienda", cuponGuardado.getIdTienda());
-        // response.put("usuariosDestinatarios", destinatarios);
-
-        // return ResponseEntity.ok(response);
-
+        // 4) mandar response final
         return ResponseEntity.ok(new CuponResponse(cuponGuardado.getIdCupon(), destinatarios));
     }
 
     private List<Long> calcularUsuariosDestinatarios(Cupon cupon) {
-        // parámetros del negocio (moverlos a config)
+        // parámetros del negocio
         Long idTienda = cupon.getIdTienda();
         int minSolicitudes = 1;
-        int limit = cupon.getUsos();
-        // boolean skipCiudadFilter = true; // para arrancar y evitar problemas de texto en direccion
 
         List<Usuario> usuarios = usuarioDAO.obtenerParticulares(
                 idTienda,
-                minSolicitudes,
-                limit
-                /*skipCiudadFilter*/);
+                minSolicitudes);
 
         return usuarios.stream().map(Usuario::getIdUsuario).collect(Collectors.toList());
     }
