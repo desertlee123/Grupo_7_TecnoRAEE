@@ -7,7 +7,6 @@ import ar.edu.unlpam.ing.ProyectoAyDSII.models.CuponesRequest;
 import ar.edu.unlpam.ing.ProyectoAyDSII.services.CuponService;
 import java.util.HashMap;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,15 +25,13 @@ public class CuponController {
         this.service = service;
     }
 
-    @PostMapping("cupones")
-    public ResponseEntity<List<Cupon>> obtenerPorIdUsuario(@RequestBody CuponesRequest cuponesRequest) {
-        ResponseEntity<List<Cupon>> response = service.obtenerPorIdUsuario(cuponesRequest.idUsuario(),
-                cuponesRequest.idCuponesExistentes());
+    @GetMapping("cupones/obtenerPorIdUsuario")
+    public ResponseEntity<List<Cupon>> obtenerPorIdUsuario(@RequestParam Long id) {
+        ResponseEntity<List<Cupon>> response = service.obtenerPorIdUsuario(id);
 
         registraLog.debug(
                 "{} cupones obtenidos para el usuario con id {} ",
-                (response.getStatusCode() == HttpStatus.OK) ? response.getBody().size() : "no hubo",
-                cuponesRequest);
+                (response.getStatusCode() == HttpStatus.OK) ? response.getBody().size() : "no hubo", id);
 
         int size;
         if (response.getBody() == null) {
@@ -46,14 +43,12 @@ public class CuponController {
         if (response.getStatusCode() == HttpStatus.OK) {
             registraLog.debug(
                     "{} cupones obtenidos para el usuario con id {} ",
-                    size,
-                    cuponesRequest.idUsuario());
-            registraLog.info("Cupones obtenidos con exito para el usuario con id {}", cuponesRequest.idUsuario());
+                    size);
+            registraLog.info("Cupones obtenidos con exito para el usuario con id {}", id);
         } else if (response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
-            registraLog.info("Cupones no obtenidos por fallas en el servidor para el usuario con id {}",
-                    cuponesRequest.idUsuario());
+            registraLog.info("Cupones no obtenidos por fallas en el servidor para el usuario con id {}", id);
         } else if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
-            registraLog.info("No se encontraron cupones para el usuario con id {}", cuponesRequest.idUsuario());
+            registraLog.info("No se encontraron cupones para el usuario con id {}", id);
         }
 
         return response;

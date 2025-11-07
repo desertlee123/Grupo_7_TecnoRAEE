@@ -27,7 +27,7 @@
 
     <!-- Root logger configuration: applies to all loggers unless overridden -->
     <!-- level="debug" means all log levels (DEBUG, INFO, WARN, ERROR) will be captured -->
-    <root level="debug">
+    <root level="info">
         <!-- References both appenders, so logs go to both console AND file -->
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="FILE" />

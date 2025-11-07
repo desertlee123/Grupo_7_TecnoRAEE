@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ar.edu.unlpam.ing.ProyectoAyDSII.dao.CuponDAOProxy;
+
+import ar.edu.unlpam.ing.ProyectoAyDSII.dao.CuponDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.dao.CuponUsuarioDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.dao.UsuarioDAO;
 import ar.edu.unlpam.ing.ProyectoAyDSII.models.Cupon;
@@ -16,21 +17,21 @@ import ar.edu.unlpam.ing.ProyectoAyDSII.models.Usuario;
 
 @Service
 public class CuponService {
-    private final CuponDAOProxy cuponDAOProxy;
+    private final CuponDAO cuponDAO;
     private final CuponUsuarioDAO cuponUsuarioDAO;
     private final UsuarioDAO usuarioDAO;
 
     public CuponService(
-            CuponDAOProxy cuponDAOProxy,
+            CuponDAO cuponDAO,
             CuponUsuarioDAO cuponUsuarioDAO,
             UsuarioDAO usuarioDAO) {
-        this.cuponDAOProxy = cuponDAOProxy;
+        this.cuponDAO = cuponDAO;
         this.cuponUsuarioDAO = cuponUsuarioDAO;
         this.usuarioDAO = usuarioDAO;
     }
 
-    public ResponseEntity<List<Cupon>> obtenerPorIdUsuario(Long id, List<Long> idCuponesExistentes) {
-        return cuponDAOProxy.obtenerPorIdUsuarioLazy(id, idCuponesExistentes);
+    public ResponseEntity<List<Cupon>> obtenerPorIdUsuario(Long id) {
+        return cuponDAO.obtenerPorIdUsuario(id);
     }
 
     public ResponseEntity<CuponResponse> registrarCupon(Cupon cupon) {
@@ -38,7 +39,7 @@ public class CuponService {
         List<Long> destinatarios = calcularUsuariosDestinatarios(cupon);
 
         // 2) persistir cupón -> obtener id
-        ResponseEntity<Cupon> cuponGuardadoResponse = cuponDAOProxy.guardar(cupon);
+        ResponseEntity<Cupon> cuponGuardadoResponse = cuponDAO.guardar(cupon);
 
         if (cuponGuardadoResponse.getStatusCode() != HttpStatus.OK) {
             return ResponseEntity.internalServerError().build();
