@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,7 +19,8 @@ import ar.edu.unlpam.ing.ProyectoAyDSII.models.Cupon;
 public class CuponProxySql2o implements CuponDAO {
   private final CuponDAO cuponDAOReal;
   private HashMap<Long, CacheCupones> cache;
-  private static final long CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos
+  @Value("${spring.application.cachetime}")
+  private long CACHE_TTL_MS;
 
   private static final Logger registraLog = LoggerFactory.getLogger(CuponProxySql2o.class);
 

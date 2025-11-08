@@ -28871,3 +28871,65 @@ SELECT * FROM cupones WHERE idCupon IN (SELECT idCupon FROM cupones_usuarios WHE
 2025-11-07 17:28:53 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
 2025-11-07 17:29:04 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Devolviendo cupones desde caché para usuario 1
 2025-11-07 17:29:04 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
+2025-11-08 09:45:00 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - Starting ProyectoAyDsiiApplication using Java 24.0.2 with PID 10928 (C:\Users\nahue\Desktop\AyDS\Proyecto\Grupo_7_TecnoRAEE\target\classes started by nahue in C:\Users\nahue\Desktop\AyDS\Proyecto\Grupo_7_TecnoRAEE)
+2025-11-08 09:45:00 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-08 09:45:03 INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat initialized with port 8080 (http)
+2025-11-08 09:45:03 INFO  [org.apache.coyote.http11.Http11NioProtocol] - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-08 09:45:03 INFO  [org.apache.catalina.core.StandardService] - Starting service [Tomcat]
+2025-11-08 09:45:03 INFO  [org.apache.catalina.core.StandardEngine] - Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-11-08 09:45:03 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] - Initializing Spring embedded WebApplicationContext
+2025-11-08 09:45:03 INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] - Root WebApplicationContext: initialization completed in 3255 ms
+2025-11-08 09:45:04 INFO  [org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver] - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-08 09:45:04 INFO  [org.apache.coyote.http11.Http11NioProtocol] - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-08 09:45:04 INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat started on port 8080 (http) with context path '/'
+2025-11-08 09:45:04 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - Started ProyectoAyDsiiApplication in 5.459 seconds (process running for 6.474)
+2025-11-08 09:46:43 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-08 09:46:43 INFO  [org.springframework.web.servlet.DispatcherServlet] - Initializing Servlet 'dispatcherServlet'
+2025-11-08 09:46:43 INFO  [org.springframework.web.servlet.DispatcherServlet] - Completed initialization in 4 ms
+2025-11-08 09:46:43 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - No se encontraron cupones para el usuario con id 111
+2025-11-08 09:46:49 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Guardando cupones en cache para usuario 3
+2025-11-08 09:46:49 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 3
+2025-11-08 09:46:53 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Guardando cupones en cache para usuario 1
+2025-11-08 09:46:53 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
+2025-11-08 10:45:22 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - Starting ProyectoAyDsiiApplication using Java 24.0.2 with PID 16368 (C:\Users\nahue\Desktop\AyDS\Proyecto\Grupo_7_TecnoRAEE\target\classes started by nahue in C:\Users\nahue\Desktop\AyDS\Proyecto\Grupo_7_TecnoRAEE)
+2025-11-08 10:45:22 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-08 10:45:25 INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat initialized with port 8080 (http)
+2025-11-08 10:45:25 INFO  [org.apache.coyote.http11.Http11NioProtocol] - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-08 10:45:25 INFO  [org.apache.catalina.core.StandardService] - Starting service [Tomcat]
+2025-11-08 10:45:25 INFO  [org.apache.catalina.core.StandardEngine] - Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-11-08 10:45:25 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] - Initializing Spring embedded WebApplicationContext
+2025-11-08 10:45:25 INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] - Root WebApplicationContext: initialization completed in 3341 ms
+2025-11-08 10:45:27 INFO  [org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver] - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-08 10:45:27 INFO  [org.apache.coyote.http11.Http11NioProtocol] - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-08 10:45:27 INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat started on port 8080 (http) with context path '/'
+2025-11-08 10:45:27 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - Started ProyectoAyDsiiApplication in 6.661 seconds (process running for 8.022)
+2025-11-08 10:45:55 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-08 10:45:55 INFO  [org.springframework.web.servlet.DispatcherServlet] - Initializing Servlet 'dispatcherServlet'
+2025-11-08 10:45:55 INFO  [org.springframework.web.servlet.DispatcherServlet] - Completed initialization in 6 ms
+2025-11-08 10:45:57 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupón registrado exitosamente con id 21
+2025-11-08 10:46:24 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - No se encontraron cupones para el usuario con id 111
+2025-11-08 10:46:28 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Guardando cupones en cache para usuario 1
+2025-11-08 10:46:28 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
+2025-11-08 10:46:44 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Devolviendo cupones desde cache para usuario 1
+2025-11-08 10:46:44 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
+2025-11-08 11:42:22 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - Starting ProyectoAyDsiiApplication using Java 24.0.2 with PID 2868 (C:\Users\nahue\Desktop\AyDS\Proyecto\Grupo_7_TecnoRAEE\target\classes started by nahue in C:\Users\nahue\Desktop\AyDS\Proyecto\Grupo_7_TecnoRAEE)
+2025-11-08 11:42:22 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - No active profile set, falling back to 1 default profile: "default"
+2025-11-08 11:42:24 INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat initialized with port 8080 (http)
+2025-11-08 11:42:24 INFO  [org.apache.coyote.http11.Http11NioProtocol] - Initializing ProtocolHandler ["http-nio-8080"]
+2025-11-08 11:42:24 INFO  [org.apache.catalina.core.StandardService] - Starting service [Tomcat]
+2025-11-08 11:42:24 INFO  [org.apache.catalina.core.StandardEngine] - Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-11-08 11:42:24 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] - Initializing Spring embedded WebApplicationContext
+2025-11-08 11:42:24 INFO  [org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext] - Root WebApplicationContext: initialization completed in 1837 ms
+2025-11-08 11:42:25 INFO  [org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver] - Exposing 1 endpoint beneath base path '/actuator'
+2025-11-08 11:42:25 INFO  [org.apache.coyote.http11.Http11NioProtocol] - Starting ProtocolHandler ["http-nio-8080"]
+2025-11-08 11:42:25 INFO  [org.springframework.boot.web.embedded.tomcat.TomcatWebServer] - Tomcat started on port 8080 (http) with context path '/'
+2025-11-08 11:42:25 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.ProyectoAyDsiiApplication] - Started ProyectoAyDsiiApplication in 3.556 seconds (process running for 4.268)
+2025-11-08 11:42:48 INFO  [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-08 11:42:48 INFO  [org.springframework.web.servlet.DispatcherServlet] - Initializing Servlet 'dispatcherServlet'
+2025-11-08 11:42:48 INFO  [org.springframework.web.servlet.DispatcherServlet] - Completed initialization in 0 ms
+2025-11-08 11:42:49 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Guardando cupones en cache para usuario 1
+2025-11-08 11:42:49 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
+2025-11-08 11:42:57 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Devolviendo cupones desde cache para usuario 1
+2025-11-08 11:42:57 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
+2025-11-08 11:45:18 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.sql2o.CuponProxySql2o] - [Proxy] Guardando cupones en cache para usuario 1
+2025-11-08 11:45:18 INFO  [ar.edu.unlpam.ing.ProyectoAyDSII.controllers.CuponController] - Cupones obtenidos con exito para el usuario con id 1
